@@ -2,34 +2,24 @@ provider "aws" {
   region = var.aws_region
 }
 
-# 🪣 Crear el bucket S3 principal
-resource "aws_s3_bucket" "mi_bucket" {
-  bucket        = var.bucket_name
+# Bucket de entrada (para los .csv)
+resource "aws_s3_bucket" "csv_input_bucket" {
+  bucket        = var.input_bucket_name
   force_destroy = true
 
   tags = {
-    Name        = var.bucket_name
+    Name        = "bucket-csv-entrada"
     Environment = "dev"
   }
 }
 
-# 🔒 Bloquear acceso público
-resource "aws_s3_bucket_public_access_block" "block_public_access" {
-  bucket = aws_s3_bucket.mi_bucket.id
+# Bucket de salida (para los reportes generados por Lambda)
+resource "aws_s3_bucket" "report_output_bucket" {
+  bucket        = var.output_bucket_name
+  force_destroy = true
 
-  block_public_acls       = true
-  ignore_public_acls      = true
-  block_public_policy     = true
-  restrict_public_buckets = true
-}
-
-# 🔐 Activar cifrado automático (AES256)
-resource "aws_s3_bucket_server_side_encryption_configuration" "mi_bucket_encryption" {
-  bucket = aws_s3_bucket.mi_bucket.id
-
-  rule {
-    apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
-    }
+  tags = {
+    Name        = "bucket-reportes-salida"
+    Environment = "dev"
   }
 }

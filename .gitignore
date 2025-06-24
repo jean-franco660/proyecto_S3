@@ -1,2 +1,5 @@
-venv
+# Entornos virtuales
+.venv/
+env/
+
 .terraform/
