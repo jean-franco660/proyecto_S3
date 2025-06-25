@@ -2,26 +2,22 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource "random_id" "bucket_suffix" {
-  byte_length = 4
-}
-
 resource "aws_s3_bucket" "csv_input_bucket" {
-  bucket        = "bucket-csv-entrada-${var.env}-${random_id.bucket_suffix.hex}"
+  bucket        = "proyecto-csv-entrada-2025-${var.env}"
   force_destroy = true
 
   tags = {
-    Name        = "bucket-csv-entrada_${var.env}"
+    Name        = "proyecto-csv-entrada-2025_${var.env}"
     Environment = var.env
   }
 }
 
 resource "aws_s3_bucket" "report_output_bucket" {
-  bucket        = "bucket-reportes-salida-${var.env}-${random_id.bucket_suffix.hex}"
+  bucket        = "proyecto-reportes-procesados-${var.env}"
   force_destroy = true
 
   tags = {
-    Name        = "bucket-reportes-salida_${var.env}"
+    Name        = "proyecto-reportes-procesados_${var.env}"
     Environment = var.env
   }
 }
