@@ -13,3 +13,9 @@ variable "output_bucket_name" {
   description = "Nombre del bucket de salida para reportes"
   type        = string
 }
+
+variable "env" {
+  description = "Entorno de despliegue (ej. dev, prod)"
+  type        = string
+  default     = "dev"
+}
