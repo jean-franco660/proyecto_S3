@@ -4,22 +4,23 @@ provider "aws" {
 
 # Bucket de entrada (para los .csv)
 resource "aws_s3_bucket" "csv_input_bucket" {
-  bucket        = var.input_bucket_name
+  bucket        = "bucket-csv-entrada-${var.env}-${random_id.bucket_suffix.hex}"
   force_destroy = true
 
   tags = {
-    Name        = "bucket-csv-entrada"
-    Environment = "dev"
+    Name        = "bucket-csv-entrada_${var.env}"
+    Environment = var.env
   }
 }
 
-# Bucket de salida (para los reportes generados por Lambda)
+
 resource "aws_s3_bucket" "report_output_bucket" {
-  bucket        = var.output_bucket_name
+  bucket        = "bucket-reportes-salida-${var.env}-${random_id.bucket_suffix.hex}"
   force_destroy = true
 
   tags = {
-    Name        = "bucket-reportes-salida"
-    Environment = "dev"
+    Name        = "bucket-reportes-salida_${var.env}"
+    Environment = var.env
   }
 }
+
