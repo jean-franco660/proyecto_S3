@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "report_output_bucket" {
 }
 
 
-resource "aws_s3_bucket_notification" "bucket_notification" {
+#resource "aws_s3_bucket_notification" "bucket_notification" {
   bucket = aws_s3_bucket.csv_input_bucket.id
 
   lambda_function {
