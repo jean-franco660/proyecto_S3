@@ -13,3 +13,8 @@ variable "output_bucket_name" {
   description = "Nombre del bucket de salida para reportes"
   type        = string
 }
+
+variable "lambda_function_arn" {
+  description = "ARN de la función Lambda"
+  type        = string
+}
