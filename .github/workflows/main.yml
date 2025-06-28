@@ -1,0 +1,30 @@
+name: Validación del módulo S3
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-module:
+    name: Validar sintaxis Terraform
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: 🧰 Instalar Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: 🔍 Verificar formato
+        run: terraform fmt -check -recursive
+
+      - name: 🚀 Inicializar módulo
+        run: terraform init
+
+      - name: ✅ Validar sintaxis
+        run: terraform validate
