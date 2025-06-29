@@ -9,10 +9,11 @@ resource "aws_s3_bucket" "csv_output_bucket" {
 resource "aws_lambda_permission" "allow_s3_invoke" {
   statement_id  = "AllowExecutionFromS3"
   action        = "lambda:InvokeFunction"
-  function_name = var.lambda_function_arn
+  function_name = var.lambda_function_name
   principal     = "s3.amazonaws.com"
-  source_arn    = "arn:aws:s3:::${var.input_bucket_name}"
+  source_arn    = "arn:aws:s3:::${aws_s3_bucket.csv_input_bucket.bucket}"
 }
+
 
 resource "aws_s3_bucket_notification" "csv_input_notification" {
   bucket = aws_s3_bucket.csv_input_bucket.id
