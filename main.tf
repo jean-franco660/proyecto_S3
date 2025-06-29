@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.aws_region
-}
-
 # 🪣 Bucket de entrada CSV
 resource "aws_s3_bucket" "csv_input_bucket" {
   bucket        = var.input_bucket_name
