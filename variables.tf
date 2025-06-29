@@ -8,7 +8,12 @@ variable "output_bucket_name" {
   description = "Nombre del bucket para guardar reportes JSON"
 }
 
-variable "lambda_function_arn" {
+variable "lambda_function_name" {
+  description = "Nombre de la función Lambda que será invocada"
   type        = string
-  description = "ARN de la función Lambda que se activa con el trigger"
+}
+
+variable "lambda_function_arn" {
+  description = "ARN de la función Lambda que será invocada"
+  type        = string
 }
